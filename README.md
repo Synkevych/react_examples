@@ -12,9 +12,12 @@ The parent can pass a prop by using this syntax:
 
 ### state
 
-State on the other hand is still variables, but directly initialized and managed by the component.
-
-The state can be initialized by props.
+- State on the other hand is still variables, but directly initialized and managed by the component.
+- The state can be initialized by props.
+- State is always passed from a parent down to a child component as a prop.
+- State should not be passed to a sibling or a parent.
+- State should be owned by 1 component. 
+- Don't duplicate props to state.
 
 ### props.children
 A collection of the children inside of a component ... 
@@ -69,4 +72,14 @@ function addJob(presonObj, job){
 //  return {...personObj, job};
 }
 addJob(person, "Student");
+```
+
+### Stateless Functional Components 
+- Components implemented using a function not a class
+- The funciton implements the render method only: no constructor, no state;
+
+```jsx 
+import React from 'react';
+const Greeting = props => ( <h1> Hello, {props.name} </h1>);
+export default Greeting;
 ```
