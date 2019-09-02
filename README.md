@@ -47,13 +47,21 @@ class App extends React.Component {
 	}
 }
 ```
-### setState
+### setState is Asynchronous 
 The correct way to change state in your application.
 All changes to this.state should be pure.
 ```jsx
 	this.state = {color: 'red'};
 
 	this.setState({ color: 'blue'});
+
+// or Update Function 
+
+	this.setState((prevState, props) => {
+		return {
+			color: prevState.color + 'blue'
+		};
+	})
 ```
 
 ### Pure Function 
