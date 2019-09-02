@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import './RecipeList.css';
 
 class RecipeList extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = { favColor: "red"}
+	}
 	static defaultProps = {
 		recipes: [
 			{
@@ -43,7 +47,7 @@ class RecipeList extends React.Component {
 		const recipes = this.props.recipes.map((r, index) => (
 			<Recipe key={index} {...r} />
 		));
-		return <div className='recipe-list'>{recipes}</div>;
+		return <div className='recipe-list'>{recipes} {this.state.favColor}</div>;
 	}
 }
 
