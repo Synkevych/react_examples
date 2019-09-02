@@ -1,0 +1,38 @@
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.9.0/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<div id="app"></div>
+
+<script type="text/babel">
+  class HobbyList extends React.Component {
+    render(){
+          const style = { fontSize: '1.5em'};
+    // a list of JSX componnet 
+          const hobbies = [ "Sleeping", "Eating", "Cudding"];
+      return (
+       <ul>
+        	{hobbies.map( (hobbie,i) => {
+       			return <li style={style} key={i}> {hobbie} </li> 
+  			})}
+        </ul>
+      );
+    }
+  }
+  
+  class Pet extends React.Component {
+  render(){
+    return (
+      <div>
+        <h2>Moxie</h2>
+        <img src="https://purr.objects-us-east-1.dream.io/i/daVkj.jpg" alt="moxie my cat" />
+        <h5 style={{fontSize: '2em', margin: '2px'}}>Hobbies: </h5>
+       	<HobbyList/>
+      </div>
+    )
+ }
+}
+ReactDOM.render(<Pet /> , document.getElementById("app"));
+</script>
