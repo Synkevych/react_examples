@@ -1,0 +1,3 @@
+### props.children 
+
+A collection of the children inside of a component ... 
