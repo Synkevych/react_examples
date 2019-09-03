@@ -1,6 +1,6 @@
 .box-default{
-	max-width: 50px;
-	padding: 50px 50px 50px 50px;
+	width: 130px;
+	height:  130px;
 	margin: 10px;
 	border: solid 5px lightgrey;
 	border-radius: 20%;
