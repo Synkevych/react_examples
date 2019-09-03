@@ -4,20 +4,18 @@ import PropTypes from 'prop-types';
 import './RecipeList.css';
 
 class RecipeList extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = { favColor: "red"}
-	}
 
 	static propTypes = {
-		recipes: PropTypes.arrayOf(PropTypes.object).isRequired
+		recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
+		onDelete: PropTypes.func.isRequired
 	};
 
 	render() {
-		const recipes = this.props.recipes.map((r, index) => (
-			<Recipe key={r.id} {...r} />
+		const {onDelete} = this.props
+		const recipes = this.props.recipes.map( r => (
+			<Recipe key={r.id} {...r} onDelete={onDelete}/>
 		));
-		return <div className='recipe-list'>{recipes} {this.state.favColor}</div>;
+		return <div className='recipe-list'>{recipes}</div>;
 	}
 }
 
