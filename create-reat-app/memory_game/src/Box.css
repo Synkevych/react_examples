@@ -1,0 +1,7 @@
+.box-default{
+	width: 130px;
+	height:  130px;
+	margin: 10px;
+	border: solid 5px lightgrey;
+	border-radius: 20%;
+}
