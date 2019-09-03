@@ -1,16 +1,28 @@
 .app {
+	font-family: 'Roboto';
 	max-width: 100%;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .app ol{
- 	display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
 }
 
-li{
-	justify-content: center;
-	/* display: block; */
+.app ol li{
+	font-size: 1.2em;
 	text-align: center;
+}
+input{
+	font-size: 1.2em;
+	min-width: 250px;
+	min-height: 25px;
+	margin: 10px;
+}
+
+button{
+	font-size: 1.2em;
 }
