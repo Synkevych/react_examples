@@ -166,3 +166,17 @@ onClick = { this.handleClick }
 	<button onSubmit= { } > Save </button> 
 
 </form> 
+```
+### ref 
+Use an uncontroled input component.
+A direct reference to a DOM element
+Managing focus, text selection, or media playback 
+Integrating with third-party DOM libraries 
+```jsx
+<form onsubmit = { (e) => { e.preventDefault() 
+	console.log(this.inputText.value);
+}} >
+	<input
+		ref= { (input) => this.inputText = input } />
+</form>
+```
