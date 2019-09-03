@@ -97,3 +97,72 @@ Greeting.propTypes = {
 	name: PropTypes.string
 }
 ```
+
+### React 16 can return an array of JSX elements or a string, not need extra wrapper 
+```jsx
+render(){
+	return [
+		<div key='a'> One </div> 
+		<div key='b'> Two </div> 
+	];
+}
+```
+
+### Error Boundary, error handing in react 16
+Запроваджена нова система обробки помилок. Тепер, якщо в компоненті виникає помилка, можна застосувати метод життєвого циклу componentDidCatch.
+```jsx 
+class Map extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { hasError: false }
+  }
+
+  componentDidCatch(error, info) {
+    this.setState(() => { hasError: true })
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>На жаль, сталась прикра помилка.</h1>
+    }
+    return <MapContent />;
+  }
+}
+```
+
+### Fiber
+Fiber — це нова архітектура, що покладена в основу React 16.
+Алгоритм полягає у розбитті процесу оновлення на дві фази:
+Фаза узгодження (reconciliation) — коли виконуються переобрахунки компонентів і відбувається оновлення DOM у пам’яті.
+Фаза внеску (commit) — коли виконується безпосереднє оновлення DOM.
+
+### onClick
+```jsx 
+onClick = { () => this.setState( {name: Roman} ) }
+
+//or 
+this.handleClick = this.handleClick.bind(this)
+
+handleClick(e){
+	this.setState(( prevState, props ) => ({
+		name: prevState.name.ToUpperCase();
+	})
+}
+onClick = { this.handleClick }
+```
+
+### Forms 
+```jsx 
+<form onSubmit = { (e) => {
+	e.preventDefault();
+	const data = [...this.state.data, this.state.inputText];
+	this.setState( {data, inputText: ''});>
+}}
+
+	<input 
+		value={this.state.inputText} 
+		onChange = { (e) => { this.setState({inputText : e.target.value }) }} />
+	<button onSubmit= { } > Save </button> 
+
+</form> 
