@@ -62,6 +62,14 @@ All changes to this.state should be pure.
 			color: prevState.color + 'blue'
 		};
 	})
+
+//beter
+	this.setState( (prevState) =>{
+		let newState = prevState.arrays.map((item){
+			//change state 
+		})
+		return newState;
+	})
 ```
 
 ### Pure Function 

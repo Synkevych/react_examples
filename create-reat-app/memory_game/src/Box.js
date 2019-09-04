@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Box.css';
 
-class Box extends React.Component {
-	static defaultProps = {
-		handleClick() { }
+const Box = (props) => {
+	let style = {};
+	if (props.showing) {
+		style.backgroundColor = props.backgroundColor;
 	}
-	static propTypes = {
-		handleClick: PropTypes.func.isRequired
-	}
-	render() {
-		const { color, handleClick, id} = this.props;
-		return (
-			<div
-				onClick={() => handleClick(id)}
-				className='box-default'
-				style={{ backgroundColor: color }}
-			></div>
-		);
-	}
-}
+	return (
+		<div
+			onClick={props.onClick}
+			className='box-default'
+			style= { style }
+		></div>
+	);
+};
 
+Box.propTypes = {
+	showing: PropTypes.bool.isRequired,
+	backgroundColor: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired
+};
 export default Box;

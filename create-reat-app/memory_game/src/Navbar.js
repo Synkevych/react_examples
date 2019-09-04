@@ -7,7 +7,7 @@ export default class Navbar extends React.Component {
 		onNewGame(){}
 	};
 	static propTypes = {
-		onNewGame: PropTypes.func
+		onNewGame: PropTypes.func.isRequired
 	};
 
 	render() {
