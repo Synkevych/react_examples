@@ -71,23 +71,37 @@ class MemoryGame extends React.Component {
 			card => card.cardState === CardState.SHOWING
 		);
 		const ids = showingCards.map(card => card.id);
-		if(showingCards.length === 2 && 
-			showingCards[0].backgroundColor === showingCards[1].backgroundColor)
-			{
-				cards = mapCardState(cards, ids, CardState.MATCHING);
-			}else if(showingCards.length === 2 ){
-				let hidingCards = mapCardState(cards, ids, CardState.HIDING);
+		if (
+			showingCards.length === 2 &&
+			showingCards[0].backgroundColor === showingCards[1].backgroundColor
+		) {
+			cards = mapCardState(cards, ids, CardState.MATCHING);
+		} else if (showingCards.length === 2) {
+			let hidingCards = mapCardState(cards, ids, CardState.HIDING);
 
-				noClick = true;
+			noClick = true;
 
-				this.setState({ cards, noClick }, () => {
-					setTimeout( () => {
-						this.setState({cards : hidingCards, noClick: false })
-					}, 1300)
-				});
-				return;
-			}
-			this.setState({ cards, noClick });
+			this.setState({ cards, noClick }, () => {
+				setTimeout(() => {
+					this.setState({ cards: hidingCards, noClick: false });
+				}, 1300);
+			});
+			return;
+		}
+
+		let newGame = cards.map(card => {
+			if (card.cardState !== 2) 
+			 return false;
+			 else return true
+		});
+
+		if(!newGame.includes(false)){
+			alert('Congratulations, You Just Won This Game!')
+			this.handleNewGame()
+		} else {
+
+		this.setState({ cards, noClick });
+		}
 	}
 
 	handleNewGame() {
@@ -97,13 +111,11 @@ class MemoryGame extends React.Component {
 		}));
 		cards = this.shuffle(cards);
 		this.setState({ cards });
-		console.log('this.state', this.state);
 	}
 
 	render() {
 		let { cards } = this.state;
 		const boxes = cards.map((card, index) => {
-			console.log(card.cardState !== CardState.HIDING);
 			return (
 				<Box
 					key={index}
