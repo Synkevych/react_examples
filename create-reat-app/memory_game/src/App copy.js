@@ -1,26 +1,11 @@
 import React from 'react';
 import Box from './Box';
-import NavBar from './Navbar';
 import PropTypes from 'prop-types';
 
 import './App.css';
 
+const NUM_COLORS = 8;
 const NUM_BOXES = 16;
-const CardState = {
-	HIDING: 0,
-	SHOWING: 1,
-	MATCHING: 2
-};
-
-let cards = [
-	{ id: 0, cardState: CardState.HIDING, backgroundColor: 'red'},
-	{ id: 1, cardState: CardState.HIDING, backgroundColor: 'red'},	
-	{ id: 2, cardState: CardState.HIDING, backgroundColor: 'pink'},
-	{ id: 3, cardState: CardState.HIDING, backgroundColor: 'pink'},	
-	{ id: 4, cardState: CardState.HIDING, backgroundColor: 'blue'},
-	{ id: 5, cardState: CardState.HIDING, backgroundColor: 'blue'},	
-];
-
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,7 +22,6 @@ class App extends React.Component {
 		let colorIndex = Math.floor(Math.random() * this.props.allColors.length);
 		return this.props.allColors[colorIndex];
 	}
-	
 	handleClick(id) {
 		this.setState((prevState, props) => {
 			const colors = [...this.state.BOXES_start];
@@ -73,12 +57,7 @@ class App extends React.Component {
 				handleClick={this.handleClick}
 			/>
 		));
-		return ( 
-		<div>
-			 <NavBar />
-			<div className='App'>{boxes}</div>
-		</div>
-		)
+		return <div className='App'>{boxes}</div>;
 	}
 }
 
