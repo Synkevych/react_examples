@@ -5,233 +5,129 @@ import PropTypes from 'prop-types';
 
 import './App.css';
 
-const NUM_BOXES = 16;
-const CardState = {
+const cardState = {
 	HIDING: 0,
-	SHOWING: 1,
-	MATCHING: 2
+	SHOWING: 0,
+	MATCHING: 0
 };
 
 let cards = [
-	{ id: 0, cardState: CardState.HIDING, backgroundColor: 'red'},
-	{ id: 1, cardState: CardState.HIDING, backgroundColor: 'red'},	
-	{ id: 2, cardState: CardState.HIDING, backgroundColor: 'pink'},
-	{ id: 3, cardState: CardState.HIDING, backgroundColor: 'pink'},	
-	{ id: 4, cardState: CardState.HIDING, backgroundColor: 'blue'},
-	{ id: 5, cardState: CardState.HIDING, backgroundColor: 'blue'},	
+	{ id: 0, cardState: cardState.HIDING, backgroundColor: 'red' },
+	{ id: 1, cardState: cardState.HIDING, backgroundColor: 'red' },
+	{ id: 2, cardState: cardState.HIDING, backgroundColor: 'pink' },
+	{ id: 3, cardState: cardState.HIDING, backgroundColor: 'pink' },
+	{ id: 4, cardState: cardState.HIDING, backgroundColor: 'blue' },
+	{ id: 5, cardState: cardState.HIDING, backgroundColor: 'blue' },
+	{ id: 6, cardState: cardState.HIDING, backgroundColor: 'grey' },
+	{ id: 7, cardState: cardState.HIDING, backgroundColor: 'grey' },
+	{ id: 8, cardState: cardState.HIDING, backgroundColor: 'black' },
+	{ id: 9, cardState: cardState.HIDING, backgroundColor: 'black' }
 ];
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		const BOXES_end = Array(NUM_BOXES)
-			.fill()
-			.map(this.getRandomColor, this);
 
-		const BOXES_start = Array(NUM_BOXES).fill('#9fc2c9');
+		this.state = { cards: shuffle(cards), cardState, defaultColor: '#9fc2c9' };
 
-		this.state = { BOXES_start, BOXES_end, defaultColor: '#9fc2c9', openBoxId: null };
 		this.handleClick = this.handleClick.bind(this);
+
+		function shuffle(cards) {
+			return cards.sort(function(a, b) {
+				return 0.5 - Math.random();
+			});
+		}
 	}
 	getRandomColor() {
 		let colorIndex = Math.floor(Math.random() * this.props.allColors.length);
 		return this.props.allColors[colorIndex];
 	}
-	
+
 	handleClick(id) {
 		this.setState((prevState, props) => {
-			const colors = [...this.state.BOXES_start];
-			let isOpenColor = this.state.openBoxId;
-			let newColors =  colors.map((color, index) => {
-				if (index === id) {
-					if(color === colors[isOpenColor]){
-						console.log("color", color, isOpenColor, colors[isOpenColor]);
-						isOpenColor = null;
-						return this.state.BOXES_end[index];
+			const { cards, cardState, defaultColor } = Object.assign({}, prevState);
+
+			let newCards = cards.map((card, index) => {
+				if (card.id === id) {
+					if (cardState.HIDING) {
+						//  if 1 color openned
+						if (
+							card.backgroundColor === cards[cardState.SHOWING].backgroundColor
+						) {
+							card.cardState = 1;
+							cardState.HIDING = 0;
+							cardState.SHOWING = 0;
+							cardState.MATCHING += 2;
+							card.cardState = 1;
+							return card;
+						} else {
+							// color 1 != color 2
+
+							cards[cardState.SHOWING].cardState = 0;
+							cardState.HIDING = 0;
+							cardState.SHOWING = 0;
+							return card
+						}
 					} else {
-						isOpenColor = index;
-						return this.state.BOXES_end[index];
+						//  if 0 color openned
+						cardState.HIDING += 1;
+						card.cardState = 1;
+						cardState.SHOWING = index;
+						return card;
 					}
 				}
-				return color;
+				return card;
 			});
-			return { BOXES_start: newColors,
-				defaultColor: '#9fc2c9',
-				id: [],
-				openBoxId: isOpenColor
-			};
+			console.log('cards ', cards, cardState);
+			return { cards, cardState, defaultColor };
 		});
 	}
+	showClickedBoxColor(card) {
+		setInterval(() => {}, 1600);
+	}
+
 	render() {
-		let { BOXES_start } = this.state;
-		console.log('BOXES_end', BOXES_start);
-		const boxes = BOXES_start.map((color, index) => (
-			<Box
-				key={index}
-				id={index}
-				color={color}
-				handleClick={this.handleClick}
-			/>
-		));
-		return ( 
-		<div>
-			 <NavBar />
-			<div className='App'>{boxes}</div>
-		</div>
-		)
+		let { cards, defaultColor } = this.state;
+		const boxes = cards.map((color, index) => {
+			let bgColor = color.backgroundColor;
+			if (!color.cardState) {
+				bgColor = defaultColor;
+			}
+			return (
+				<Box
+					key={index}
+					id={color.id}
+					color={bgColor}
+					handleClick={this.handleClick}
+				/>
+			);
+		});
+		return (
+			<div>
+				<NavBar
+					onNewGame={() =>
+						this.setState({
+							cards: [
+								{ id: 0, cardState: 0, backgroundColor: 'red' },
+								{ id: 1, cardState: 0, backgroundColor: 'red' },
+								{ id: 2, cardState: 0, backgroundColor: 'pink' },
+								{ id: 3, cardState: 0, backgroundColor: 'pink' },
+								{ id: 4, cardState: 0, backgroundColor: 'blue' },
+								{ id: 5, cardState: 0, backgroundColor: 'blue' },
+								{ id: 6, cardState: 0, backgroundColor: 'grey' },
+								{ id: 7, cardState: 0, backgroundColor: 'grey' },
+								{ id: 8, cardState: 0, backgroundColor: 'black' },
+								{ id: 9, cardState: 0, backgroundColor: 'black' }
+							],
+							cardState: { HIDING: 0, SHOWING: 0, MATCHING: 0 },
+							defaultColor: '#9fc2c9'
+						})
+					}
+				/>
+				<div className='App'>{boxes}</div>
+			</div>
+		);
 	}
 }
-
-App.defaultProps = {
-	allColors: [
-		'AliceBlue',
-		'AntiqueWhite',
-		'Aqua',
-		'Aquamarine',
-		'Azure',
-		'Beige',
-		'Bisque',
-		'Black',
-		'BlanchedAlmond',
-		'Blue',
-		'BlueViolet',
-		'Brown',
-		'BurlyWood',
-		'CadetBlue',
-		'Chartreuse',
-		'Chocolate',
-		'Coral',
-		'CornflowerBlue',
-		'Cornsilk',
-		'Crimson',
-		'Cyan',
-		'DarkBlue',
-		'DarkCyan',
-		'DarkGoldenRod',
-		'DarkGray',
-		'DarkGrey',
-		'DarkGreen',
-		'DarkKhaki',
-		'DarkMagenta',
-		'DarkOliveGreen',
-		'Darkorange',
-		'DarkOrchid',
-		'DarkRed',
-		'DarkSalmon',
-		'DarkSeaGreen',
-		'DarkSlateBlue',
-		'DarkSlateGray',
-		'DarkSlateGrey',
-		'DarkTurquoise',
-		'DarkViolet',
-		'DeepPink',
-		'DeepSkyBlue',
-		'DimGray',
-		'DimGrey',
-		'DodgerBlue',
-		'FireBrick',
-		'FloralWhite',
-		'ForestGreen',
-		'Fuchsia',
-		'Gainsboro',
-		'GhostWhite',
-		'Gold',
-		'GoldenRod',
-		'Gray',
-		'Grey',
-		'Green',
-		'GreenYellow',
-		'HoneyDew',
-		'HotPink',
-		'IndianRed',
-		'Indigo',
-		'Ivory',
-		'Khaki',
-		'Lavender',
-		'LavenderBlush',
-		'LawnGreen',
-		'LemonChiffon',
-		'LightBlue',
-		'LightCoral',
-		'LightCyan',
-		'LightGoldenRodYellow',
-		'LightGray',
-		'LightGrey',
-		'LightGreen',
-		'LightPink',
-		'LightSalmon',
-		'LightSeaGreen',
-		'LightSkyBlue',
-		'LightSlateGray',
-		'LightSlateGrey',
-		'LightSteelBlue',
-		'LightYellow',
-		'Lime',
-		'LimeGreen',
-		'Linen',
-		'Magenta',
-		'Maroon',
-		'MediumAquaMarine',
-		'MediumBlue',
-		'MediumOrchid',
-		'MediumPurple',
-		'MediumSeaGreen',
-		'MediumSlateBlue',
-		'MediumSpringGreen',
-		'MediumTurquoise',
-		'MediumVioletRed',
-		'MidnightBlue',
-		'MintCream',
-		'MistyRose',
-		'Moccasin',
-		'NavajoWhite',
-		'Navy',
-		'OldLace',
-		'Olive',
-		'OliveDrab',
-		'Orange',
-		'OrangeRed',
-		'Orchid',
-		'PaleGoldenRod',
-		'PaleGreen',
-		'PaleTurquoise',
-		'PaleVioletRed',
-		'PapayaWhip',
-		'PeachPuff',
-		'Peru',
-		'Pink',
-		'Plum',
-		'PowderBlue',
-		'Purple',
-		'Red',
-		'RosyBrown',
-		'RoyalBlue',
-		'SaddleBrown',
-		'Salmon',
-		'SandyBrown',
-		'SeaGreen',
-		'SeaShell',
-		'Sienna',
-		'Silver',
-		'SkyBlue',
-		'SlateBlue',
-		'SlateGray',
-		'SlateGrey',
-		'Snow',
-		'SpringGreen',
-		'SteelBlue',
-		'Tan',
-		'Teal',
-		'Thistle',
-		'Tomato',
-		'Turquoise',
-		'Violet',
-		'Wheat',
-		'White',
-		'WhiteSmoke',
-		'Yellow',
-		'YellowGreen'
-	]
-};
 
 export default App;

@@ -180,3 +180,9 @@ Integrating with third-party DOM libraries
 		ref= { (input) => this.inputText = input } />
 </form>
 ```
+### Here is a very simple way to shuffle with JS:
+
+```javascript
+var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return 0.5 - Math.random()});
+```
