@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+  display: flex;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.header-title{
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Roboto';
+}
+
+.content{
+  text-align: center;
+}
+.content label{
+  padding: 10px 10px;
+}
+
+.content input[type=radio]{
+  margin-right: 8px;
+}
+
+.button{
+background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 26px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.flag{
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 40%;
+  max-height: 50%;
+  margin: auto;
+  margin-top: 50px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.button:hover{
+background-color: rgb(9, 143, 14);
+}
+.button:active{
+background-color: #ff9800;
+}
