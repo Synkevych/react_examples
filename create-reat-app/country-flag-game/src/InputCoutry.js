@@ -28,7 +28,7 @@ class InputCountry extends Component {
 		const { name } = this.props;
 		const { disabled } = this.state;
 		return (
-			<div className='content'>
+			<div className='main'>
 				<form onSubmit={e => this.handleSubmit(e)}>
 					<label>
 						<input

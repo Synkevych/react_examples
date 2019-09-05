@@ -16,7 +16,7 @@ Img.propTypes ={
 const Result = props => {
 	const { isCorrect, countryName, onClickNext, score} = props;
 	return (
-		<form className='content'>
+		<form className='main'>
 			{isCorrect ? (
 				<div>
 					Correct: <strong>{countryName}!</strong>
@@ -147,12 +147,11 @@ class App extends React.Component {
 				{flagUrls.length > 0 ? (
 					<Img flagUrl={flagUrls[targetIndex]} />
 				) : (
-					<div> Loading ... </div>
+					<div className='flag'> Loading ... </div>
 				)}
-				<footer>  <strong>
-				 © 2019 Synkevych, Inc
-				</strong> 
-				 </footer>
+				<footer>
+					<strong>© 2019 Synkevych, Inc</strong>
+				</footer>
 			</div>
 		);
 	}

@@ -1,9 +1,13 @@
 body{
   background: #e7e9ed;
+height: 100%;
+ 
 }
-.App {
-  text-align: center;
+.app {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100%;
 }
 
 .App-logo {
@@ -35,19 +39,20 @@ body{
   color: rgb(8, 42, 94);
 }
 
-.content{
+.main{
   text-align: center;
+  flex-grow: 1;
 }
-.content label{
+.main label{
   padding: 10px 10px;
 }
 
-.content input[type=radio]{
+.main input[type=radio]{
   margin-right: 8px;
 }
 
 .button{
-background-color: #4CAF50;
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 12px 26px;
@@ -57,11 +62,11 @@ background-color: #4CAF50;
 }
 
 .flag{
-   display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 40%;
-  max-height: 50%;
+  max-width: 50%;
+  max-height: 60%;
   margin: auto;
   margin-top: 50px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -73,9 +78,38 @@ background-color: rgb(9, 143, 14);
 background-color: #ff9800;
 }
 footer{
-  position: fixed;
-  left: 0;
-  bottom: 40px;
-  width: 100%;
+  margin-top: 100px;
   text-align: center;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1000px){
+.flag{
+    max-width: 50%;
+  max-height: 60%;
+}
+}
+@media (max-width: 700px){
+  .main{
+    order:1;
+  }
+  .main form{
+    display: flex;
+    flex-direction: column;
+  }
+  .main form label{
+    align-self: stretch;
+    padding-top: 10px;
+  }
+
+.flag{
+  order:0;
+  max-width: 60%;
+  max-height: 70%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+  footer{
+    order:2;
+  }
 }
