@@ -150,7 +150,19 @@ class App extends React.Component {
 					<div className='flag'> Loading ... </div>
 				)}
 				<footer>
-					<strong>© 2019 Synkevych, Inc</strong>
+					<div>
+						Coded and built with ❤️ by{' '}
+						<a href='https://www.linkedin.com/in/synkevych' target='_blank'>
+							Synkevych{' '}
+						</a>
+					</div>
+					Source code available on{' '}
+					<a
+						href='https://github.com/Synkevych/react_examples/tree/master/create-reat-app/country-flag-game'
+						target='_blank'
+					>
+						GitHub
+					</a>
 				</footer>
 			</div>
 		);

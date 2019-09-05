@@ -9,7 +9,11 @@ height: 100%;
   align-items: stretch;
   min-height: 100%;
 }
-
+a{
+    color: #1e87f0;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -65,8 +69,8 @@ height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 50%;
-  max-height: 60%;
+  max-width: 40%;
+  max-height: 50%;
   margin: auto;
   margin-top: 50px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
