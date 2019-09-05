@@ -136,7 +136,6 @@ class App extends React.Component {
 				<h2 className='header-title'> Guess The Flag </h2>
 				{isOpen ? (
 					<Result
-						text={'This text'}
 						isCorrect={isCorrect}
 						countryName={countryNames[targetIndex]}
 						onClickNext={this.handleNext}
@@ -150,6 +149,10 @@ class App extends React.Component {
 				) : (
 					<div> Loading ... </div>
 				)}
+				<footer>  <strong>
+				 © 2019 Synkevych, Inc
+				</strong> 
+				 </footer>
 			</div>
 		);
 	}

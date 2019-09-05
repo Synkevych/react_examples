@@ -70,6 +70,7 @@ class InputCountry extends Component {
 						Guess
 					</button>
 				</form>
+
 			</div>
 		);
 	}
