@@ -1,3 +1,4 @@
-### Get 'https://restcountries.eu/rest/v2/all'
-name 
-flag 
+### Get request to - 'https://restcountries.eu/rest/v2/all'
+Add to state:
+- name
+- flag 
