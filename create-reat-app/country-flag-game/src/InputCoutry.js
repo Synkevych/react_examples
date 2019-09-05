@@ -7,7 +7,7 @@ class InputCountry extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { current: ''};
+		this.state = { current: '', disabled: true};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.onCountryChanged = this.onCountryChanged.bind(this);
@@ -15,20 +15,18 @@ class InputCountry extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		console.log('checked', this.state);
 
 		this.props.onGuessClick(this.state.current)
 	}
 
 	onCountryChanged(e){
 		let currentValue = e.currentTarget.value;
-		console.log("value", currentValue);
-		this.setState({ current:  currentValue });
+		this.setState({ current: currentValue, disabled: false});
 	}
 
 	render() {
-		const { name, targetCountry } = this.props;
-		console.log("name", name, targetCountry);
+		const { name } = this.props;
+		const { disabled } = this.state;
 		return (
 			<div className='content'>
 				<form onSubmit={e => this.handleSubmit(e)}>
@@ -68,7 +66,7 @@ class InputCountry extends Component {
 						/>
 						{name[3]}
 					</label>
-					<button type='submit' className='button'>
+					<button type='submit' className='button' disabled={disabled}>
 						Guess
 					</button>
 				</form>
@@ -76,10 +74,5 @@ class InputCountry extends Component {
 		);
 	}
 }
-
-// InputCountry.PropTypes = {
-// 	name: PropTypes.arrayOf.isRequired,
-// 	onClick: PropTypes.func.isRequired
-// }
 
 export default InputCountry;

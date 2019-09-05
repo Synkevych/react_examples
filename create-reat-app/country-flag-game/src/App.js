@@ -1,27 +1,50 @@
 import React from 'react';
-import './App.css';
 import InputCoutry from './InputCoutry';
+import PropTypes from 'prop-types'
+
+import './App.css';
 
 const Img = (props) =>{
 	const {flagUrl} = props;
 	return <img className='flag' src={flagUrl} alt='' />;
 }
 
+Img.propTypes ={
+	flagUrl: PropTypes.string.isRequired
+}
+
 const Result = props => {
-	const { text, isCorrect, countryName } = props;
+	const { isCorrect, countryName, onClickNext, score} = props;
 	return (
 		<form className='content'>
 			{isCorrect ? (
-				<p>Correct: {countryName}! </p>
+				<div>
+					Correct: <strong>{countryName}!</strong>
+					<h2 className='score-title'>
+						Your score: <strong>{score}</strong>
+					</h2>
+				</div>
 			) : (
-				<p>Incorrect! Correct Answer: {countryName}</p>
+				<div>
+					Incorrect! Correct Answer: <strong>{countryName}</strong>
+					<h2 className='score-title'>
+						Your score: <strong>{score}</strong>
+					</h2>
+				</div>
 			)}
-			<button type='submit' className='button'>
-				Next
+			<button type='submit' className='button' onClick={e => onClickNext(e)}>
+				{isCorrect ? 'Next': 'New Game'}
 			</button>
 		</form>
 	);
 };
+
+Result.propTypes = {
+	isCorrect: PropTypes.bool.isRequired,
+	countryName: PropTypes.string.isRequired,
+	onClickNext: PropTypes.func.isRequired,
+	score: PropTypes.number.isRequired
+}
 
 class App extends React.Component {
 	constructor(props) {
@@ -30,12 +53,13 @@ class App extends React.Component {
 			flagUrls: [],
 			countryNames: [],
 			selectedIndex: [null,null,null,null],
-			targeIndex: null,
+			targetIndex: null,
 			isCorrect: false,
 			isOpen: false,
 			score: 0
 		};
 		this.handleClick = this.handleClick.bind(this);
+		this.handleNext = this.handleNext.bind(this);
 	}
 	componentDidMount() {
 		const allData = 'https://restcountries.eu/rest/v2/all';
@@ -66,24 +90,30 @@ class App extends React.Component {
 			});
 	}
 
-	newGame(countryNames) {
+	newGame(countryNames, isNewGame) {
+		let score = isNewGame ? this.state.score : 0;
 		const selectedIndex = this.state.selectedIndex.map(() =>
 		Math.floor(Math.random() * countryNames.length)
 		);
 		
 		const targetIndex =
 			selectedIndex[Math.floor(Math.random() * 4)];
-		this.setState({ selectedIndex, targetIndex });
+		this.setState({ selectedIndex, targetIndex, score: score });
 	}
 
 	handleClick(event) {
-		if (event === this.state.targetCountry) {
-
-			this.setState({ isCorrect: true, isOpen: true});
+		const score = this.state.score + 1;
+		if (event === this.state.countryNames[this.state.targetIndex]) {
+			this.setState({ isCorrect: true, isOpen: true, score: score});
 		} else {
-			this.setState({ isCorrect: false, isOpen: true});
-
+			this.setState({ isCorrect: false, isOpen: true });
 		}
+	}
+
+	handleNext(e){
+		e.preventDefault();
+		this.setState({isOpen: false});
+		this.newGame(this.state.countryNames, this.state.isCorrect)
 	}
 
 	render() {
@@ -93,12 +123,14 @@ class App extends React.Component {
 			targetIndex,
 			selectedIndex,
 			isCorrect,
-			isOpen
+			isOpen,
+			score
 		} = this.state;
-		console.log('this.state', selectedIndex, targetIndex);
+		console.log('answer', countryNames[targetIndex]);
 		const countrys = selectedIndex.map((i) => {
 				return countryNames[i];
 		});
+		
 		return (
 			<div className='app'>
 				<h2 className='header-title'> Guess The Flag </h2>
@@ -107,15 +139,17 @@ class App extends React.Component {
 						text={'This text'}
 						isCorrect={isCorrect}
 						countryName={countryNames[targetIndex]}
+						onClickNext={this.handleNext}
+						score={score}
 					/>
 				) : (
-					<InputCoutry
-						name={countrys}
-						targetIndex={targetIndex}
-						onGuessClick={this.handleClick}
-					/>
+					<InputCoutry name={countrys} onGuessClick={this.handleClick} />
 				)}
-				<Img flagUrl={flagUrls[targetIndex]} />
+				{flagUrls.length > 0 ? (
+					<Img flagUrl={flagUrls[targetIndex]} />
+				) : (
+					<div> Loading ... </div>
+				)}
 			</div>
 		);
 	}
