@@ -188,9 +188,30 @@ Integrating with third-party DOM libraries
 		ref= { (input) => this.inputText = input } />
 </form>
 ```
-### Here is a very simple way to shuffle with JS:
+### Here is a very simple way to shuffle array with JS:
 
 ```javascript
 var points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return 0.5 - Math.random()});
 ```
+
+
+### Mounting 
+- constructor()
+- static getDerivedStateFromProps()
+- dep: componentWillMount() - only run 1 time 
+- rennder() - is the only required method in a class component.
+- componentDidMount() - run only 1 time, makinng AJAX request
+
+### Unmounting 
+- ComponentWillUnmount() - clearInterval()
+
+### Updating
+- static getDerivedStateFromProps()
+- dep: ComponentWillReceiveProps(nextProps)
+- shouldComponentUpdate(nextProps, nextState)
+- dep: componentWillUpdate(nextProps, nextState)
+- render()
+- getSnapshotBeforeUpdate()
+- componentDidUpdate(prevProps, prevState)
+
