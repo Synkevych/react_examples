@@ -50,9 +50,20 @@ a{
 .main label{
   padding: 10px 10px;
 }
+input[type="radio"]:hover, input[type="radio"] + label:hover {
+  cursor: pointer;
+color: rgb(9, 143, 14);
+}
 
-.main input[type=radio]{
-  margin-right: 8px;
+input[type="radio"]:checked+label{
+  color:#4CAF50;
+  font-weight: bold;
+}
+
+input[type='radio']:after{
+        border-radius: 15px;
+        background-color: #18c118;
+        border: 2px solid rgb(220, 20, 20);
 }
 
 .button{

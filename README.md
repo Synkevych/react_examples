@@ -194,7 +194,12 @@ Integrating with third-party DOM libraries
 var points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return 0.5 - Math.random()});
 ```
-
+### Correct way to use emojis in React 
+```jsx 
+<span role='img' aria-label='heart'>
+	❤️
+</span>
+```
 
 ### Mounting 
 - constructor()
@@ -215,3 +220,10 @@ points.sort(function(a, b){return 0.5 - Math.random()});
 - getSnapshotBeforeUpdate()
 - componentDidUpdate(prevProps, prevState)
 
+# Problems with port
+
+There is a problem: server running on port 8081, react app on port 3000.
+To fix: need to specify server port inside package.json file, adding: 
+```
+"proxy" : "http://localhost:8081",
+```

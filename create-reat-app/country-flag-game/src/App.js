@@ -1,39 +1,34 @@
 import React from 'react';
 import InputCoutry from './InputCoutry';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import './App.css';
 
-const Img = (props) =>{
-	const {flagUrl} = props;
-	return <img className='flag' src={flagUrl} alt='' />;
-}
+const Img = props => {
+	const { flagUrl, countryName } = props;
+	return <img className='flag' src={flagUrl} alt={countryName} />;
+};
 
-Img.propTypes ={
-	flagUrl: PropTypes.string.isRequired
-}
+Img.propTypes = {
+	flagUrl: PropTypes.string.isRequired,
+	countryName: PropTypes.string.isRequired
+};
 
 const Result = props => {
-	const { isCorrect, countryName, onClickNext, score} = props;
+	const { isCorrect, countryName, onClickNext, score } = props;
 	return (
 		<form className='main'>
-			{isCorrect ? (
-				<div>
-					Correct: <strong>{countryName}!</strong>
-					<h2 className='score-title'>
-						Your score: <strong>{score}</strong>
-					</h2>
-				</div>
-			) : (
-				<div>
-					Incorrect! Correct Answer: <strong>{countryName}</strong>
-					<h2 className='score-title'>
-						Your score: <strong>{score}</strong>
-					</h2>
-				</div>
-			)}
+			<div>
+				{isCorrect
+					? 'Correct: 👍,'
+					: 'Incorrect 👎, Correct Answer:'}{' '}
+				<strong>{countryName}!</strong>
+				<h2 className='score-title'>
+					Your score: <strong>{score}</strong>
+				</h2>
+			</div>
 			<button type='submit' className='button' onClick={e => onClickNext(e)}>
-				{isCorrect ? 'Next': 'New Game'}
+				{isCorrect ? 'Next' : 'New Game'}
 			</button>
 		</form>
 	);
@@ -44,7 +39,7 @@ Result.propTypes = {
 	countryName: PropTypes.string.isRequired,
 	onClickNext: PropTypes.func.isRequired,
 	score: PropTypes.number.isRequired
-}
+};
 
 class App extends React.Component {
 	constructor(props) {
@@ -52,7 +47,7 @@ class App extends React.Component {
 		this.state = {
 			flagUrls: [],
 			countryNames: [],
-			selectedIndex: [null,null,null,null],
+			selectedIndex: [null, null, null, null],
 			targetIndex: null,
 			isCorrect: false,
 			isOpen: false,
@@ -66,7 +61,7 @@ class App extends React.Component {
 		fetch(allData)
 			.then(data => data.json())
 			.then(data =>
-				data.map((arr, index) => {
+				data.map(arr => {
 					const flagUrls = arr.flag;
 					const countryNames = arr.name;
 					return { flagUrls, countryNames };
@@ -92,28 +87,27 @@ class App extends React.Component {
 
 	newGame(countryNames, isNewGame) {
 		let score = isNewGame ? this.state.score : 0;
-		const selectedIndex = this.state.selectedIndex.map(() =>
-		Math.floor(Math.random() * countryNames.length)
+		let selectedIndex = this.state.selectedIndex.map(() =>
+			Math.floor(Math.random() * countryNames.length)
 		);
-		
-		const targetIndex =
-			selectedIndex[Math.floor(Math.random() * 4)];
+
+		const targetIndex = selectedIndex[Math.floor(Math.random() * 4)];
 		this.setState({ selectedIndex, targetIndex, score: score });
 	}
 
 	handleClick(event) {
 		const score = this.state.score + 1;
 		if (event === this.state.countryNames[this.state.targetIndex]) {
-			this.setState({ isCorrect: true, isOpen: true, score: score});
+			this.setState({ isCorrect: true, isOpen: true, score: score });
 		} else {
 			this.setState({ isCorrect: false, isOpen: true });
 		}
 	}
 
-	handleNext(e){
+	handleNext(e) {
 		e.preventDefault();
-		this.setState({isOpen: false});
-		this.newGame(this.state.countryNames, this.state.isCorrect)
+		this.setState({ isOpen: false });
+		this.newGame(this.state.countryNames, this.state.isCorrect);
 	}
 
 	render() {
@@ -126,11 +120,10 @@ class App extends React.Component {
 			isOpen,
 			score
 		} = this.state;
-		console.log('answer', countryNames[targetIndex]);
-		const countrys = selectedIndex.map((i) => {
-				return countryNames[i];
+		const countrys = selectedIndex.map(i => {
+			return countryNames[i];
 		});
-		
+
 		return (
 			<div className='app'>
 				<h2 className='header-title'> Guess The Flag </h2>
@@ -145,14 +138,25 @@ class App extends React.Component {
 					<InputCoutry name={countrys} onGuessClick={this.handleClick} />
 				)}
 				{flagUrls.length > 0 ? (
-					<Img flagUrl={flagUrls[targetIndex]} />
+					<Img
+						flagUrl={flagUrls[targetIndex]}
+						countryName={countryNames[targetIndex]}
+					/>
 				) : (
 					<div className='flag'> Loading ... </div>
 				)}
 				<footer>
 					<div>
-						Coded and built with ❤️ by{' '}
-						<a href='https://www.linkedin.com/in/synkevych' target='_blank'>
+						Coded and built with{' '}
+						<span role='img' aria-label='heart'>
+							❤️
+						</span>{' '}
+						by{' '}
+						<a
+							href='https://www.linkedin.com/in/synkevych'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
 							Synkevych{' '}
 						</a>
 					</div>
@@ -160,6 +164,7 @@ class App extends React.Component {
 					<a
 						href='https://github.com/Synkevych/react_examples/tree/master/create-reat-app/country-flag-game'
 						target='_blank'
+						rel='noopener noreferrer'
 					>
 						GitHub
 					</a>

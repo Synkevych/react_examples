@@ -29,41 +29,45 @@ class InputCountry extends Component {
 		const { disabled } = this.state;
 		return (
 			<div className='main'>
-				<form onSubmit={e => this.handleSubmit(e)}>
-					<label>
+				<form onSubmit={e => this.handleSubmit(e)} className="check">
 						<input
 							name='nameOfChoice'
 							type='radio'
 							value={name[0]}
 							onChange={this.onCountryChanged}
+							id="name1"
 						/>
+					<label htmlFor="name1">
 						{name[0]}
 					</label>
-					<label>
 						<input
 							type='radio'
 							name='nameOfChoice'
 							value={name[1]}
 							onChange={this.onCountryChanged}
+							id="name2"
 						/>
+					<label htmlFor="name2">
 						{name[1]}
 					</label>
-					<label>
 						<input
 							type='radio'
 							name='nameOfChoice'
 							value={name[2]}
 							onChange={this.onCountryChanged}
+							id="name3"
 						/>
+					<label htmlFor="name3">
 						{name[2]}
 					</label>
-					<label>
 						<input
 							type='radio'
 							name='nameOfChoice'
 							value={name[3]}
 							onChange={this.onCountryChanged}
+							id="name4"
 						/>
+					<label htmlFor="name4">
 						{name[3]}
 					</label>
 					<button type='submit' className='button' disabled={disabled}>

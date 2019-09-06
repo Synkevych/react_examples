@@ -20,17 +20,7 @@ class App extends React.Component {
 		console.log(TODOS);
 		this.setState({ todos: TODOS, inpuText: '' });
 	}
-	/* My solution 
-	handleClick(e) {
-		e.preventDefault();
-		let text = this.state.inpuText.slice();
-		this.setState(state => {
-			let newData = state.todos.slice();
-			newData.push(text);
-			return { todos: newData, inpuText: '' };
-		});
-	}
-	*/
+
 	render() {
 		let { inpuText, todos } = this.state;
 console.log("this.state", this.state.todos);
