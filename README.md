@@ -227,3 +227,83 @@ To fix: need to specify server port inside package.json file, adding:
 ```
 "proxy" : "http://localhost:8081",
 ```
+
+### HTML5 history object
+using Ract our server return always index.html page with only div id="root"
+
+```javascript
+history.back()
+history.forward();
+history.pushState({}, 'title', '/newpage');
+```
+### React Router 
+
+React Router v4(March 2017) a library to manage routing in your single page application
+
+BrouserRouter - requires server site support 
+- '/'
+- '/user'
+- '/user/57493/massages'
+
+HashRouter - does not required server support 
+- '/#'
+- '/#user
+```bash 
+npm install --save react-router-dom
+```
+
+### Redux – a popular state management library 
+Action - this is a playn js object, must have a key called type and a string value
+```jsx 
+{
+	type: "LOGOUT_USER"
+}
+```
+Reducer - a function that accept the state and an action and returns a new state(entire state object )
+We cannot make a store without a reducer! Reducer is a function that determines what our state looks like and how we change the state;
+```jsx 
+function rootReducer (state={}, action){
+	swithch(action.type){
+		case "LOGOUT_USER":
+			return {...state, login: false }
+		case "LOGIN_USER":
+			return {...state, login: true }
+		default:
+			return state;
+	}
+}
+```
+Store - one big js object represent state in our application
+To create Store use createStore function wich accepts the root reducer as a parameter 
+
+```jsx
+const store = Redux.createStore(rootReducer);
+
+//or
+
+const store = Redux.createStore(rootReducer);
+store.dispatch({
+	type: "LOGIN_USER"
+});
+
+// to get state
+
+const newState = store.getState();
+
+``` 
+
+You  can add a listenr to see whwn the state has changed 
+```jsx 
+const changeCallback = () => {
+	console.log("State has changed", store.getState());
+}
+// to cancel subscribe 
+const unsubscribe = store.listen(changeCallback);
+```
+### Redux Derictorty Structure
+- src 
+- - actions
+- - components 
+- - containers 
+- - reducers 
+- index.js
