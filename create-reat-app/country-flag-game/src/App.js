@@ -19,9 +19,7 @@ const Result = props => {
 	return (
 		<form className='main'>
 			<div>
-				{isCorrect
-					? 'Correct: 👍,'
-					: 'Incorrect 👎, Correct Answer:'}{' '}
+				{isCorrect ? 'Correct: 👍,' : 'Incorrect 👎, Correct Answer:'}{' '}
 				<strong>{countryName}!</strong>
 				<h2 className='score-title'>
 					Your score: <strong>{score}</strong>
@@ -47,7 +45,7 @@ class App extends React.Component {
 		this.state = {
 			flagUrls: [],
 			countryNames: [],
-			selectedIndex: [null, null, null, null],
+			selectedCountrysIndex: [null, null, null, null],
 			targetIndex: null,
 			isCorrect: false,
 			isOpen: false,
@@ -57,8 +55,11 @@ class App extends React.Component {
 		this.handleNext = this.handleNext.bind(this);
 	}
 	componentDidMount() {
-		const allData = 'https://restcountries.eu/rest/v2/all';
-		fetch(allData)
+		this.newGame();
+	}
+	newGame() {
+		const APIURL = 'https://restcountries.eu/rest/v2/all';
+		fetch(APIURL)
 			.then(data => data.json())
 			.then(data =>
 				data.map(arr => {
@@ -73,41 +74,66 @@ class App extends React.Component {
 				});
 				let flagUrls = [];
 				let countryNames = [];
-				country.filter((country, index) => {
-					if (index <= 100) {
-						flagUrls[index] = country.flagUrls;
-						countryNames[index] = country.countryNames;
-						return true;
-					} else return false;
+				country.map((country, index) => {
+					flagUrls[index] = country.flagUrls;
+					countryNames[index] = country.countryNames;
+					return false
 				});
-				this.newGame(countryNames);
+				this.nextCountry(countryNames, false);
 				this.setState({ flagUrls, countryNames });
 			});
 	}
+	removeCountryFromState(countryNames, id) {
+		let countryName = countryNames[id];
+		let newCountrys = countryNames.filter(country => country !== countryName);
+		this.setState({ countryNames: newCountrys });
+	}
+	getRandom = val => Math.floor(Math.random() * val);
+	nextCountry(countryNames, isNewGame, skipRemoving) {
+		if (countryNames === false) {
+			this.newGame();
+		} else {
+			let score = this.state.score;
+			if (!skipRemoving) {
+				this.removeCountryFromState(countryNames, this.state.targetIndex);
+				score = isNewGame ? this.state.score : 0;
+			}
 
-	newGame(countryNames, isNewGame) {
-		let score = isNewGame ? this.state.score : 0;
-		let selectedIndex = this.state.selectedIndex.map(() =>
-			Math.floor(Math.random() * countryNames.length)
-		);
+			let selectedCountrysIndex = this.state.selectedCountrysIndex.map(() =>
+				this.getRandom(this.state.countryNames.length)
+			);
 
-		const targetIndex = selectedIndex[Math.floor(Math.random() * 4)];
-		this.setState({ selectedIndex, targetIndex, score: score });
+			const targetIndex =
+				selectedCountrysIndex[this.getRandom(selectedCountrysIndex.length)];
+			this.setState({
+				selectedCountrysIndex,
+				targetIndex,
+				score: score
+			});
+		}
 	}
 
 	handleClick(event) {
-		const score = this.state.score + 1;
-		if (event === this.state.countryNames[this.state.targetIndex]) {
-			this.setState({ isCorrect: true, isOpen: true, score: score });
+		if (event) {
+			const score = this.state.score + 1;
+			if (event === this.state.countryNames[this.state.targetIndex]) {
+				this.setState({ isCorrect: true, isOpen: true, score: score });
+			} else {
+				this.setState({ isCorrect: false, isOpen: true });
+			}
 		} else {
-			this.setState({ isCorrect: false, isOpen: true });
+			this.nextCountry(this.state.countryNames, false, true);
 		}
 	}
 
 	handleNext(e) {
 		e.preventDefault();
 		this.setState({ isOpen: false });
-		this.newGame(this.state.countryNames, this.state.isCorrect);
+		if (this.state.isCorrect) {
+			this.nextCountry(this.state.countryNames, this.state.isCorrect);
+		} else {
+			this.nextCountry(false, this.state.isCorrect);
+		}
 	}
 
 	render() {
@@ -115,18 +141,18 @@ class App extends React.Component {
 			countryNames,
 			flagUrls,
 			targetIndex,
-			selectedIndex,
+			selectedCountrysIndex,
 			isCorrect,
 			isOpen,
 			score
 		} = this.state;
-		const countrys = selectedIndex.map(i => {
+		const countrys = selectedCountrysIndex.map(i => {
 			return countryNames[i];
 		});
-
+		
 		return (
 			<div className='app'>
-				<h2 className='header-title'> Guess The Flag </h2>
+				<h2 className='header-title'> Guess The Flag</h2>
 				{isOpen ? (
 					<Result
 						isCorrect={isCorrect}
@@ -135,7 +161,12 @@ class App extends React.Component {
 						score={score}
 					/>
 				) : (
-					<InputCoutry name={countrys} onGuessClick={this.handleClick} />
+					<div className='question-form'>
+						<p className='question-title'>
+							Questions {score + 1} from {countryNames.length}
+						</p>
+						<InputCoutry name={countrys} onGuessClick={this.handleClick} />
+					</div>
 				)}
 				{flagUrls.length > 0 ? (
 					<Img

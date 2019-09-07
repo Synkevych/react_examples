@@ -1,130 +1,160 @@
-body{
-  background: #e7e9ed;
-height: 100%;
- 
+body {
+	background: #e7e9ed;
+	height: 100%;
 }
 .app {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	min-height: 100vh;
 }
-a{
-    color: #1e87f0;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-}
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+a {
+	color: #1e87f0;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header-title {
+	text-align: center;
+	font-size: 2em;
+	font-family: 'Roboto';
+	margin: 2vh 0;
+}
+.score-title {
+	text-align: center;
+	font-size: calc(10px + 2vmin);
+	font-family: 'Roboto';
+	color: rgb(8, 42, 94);
+}
+.check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.header-title{
-  text-align: center;
-  font-size: 2em;
-  font-family: 'Roboto';
-}
-.score-title{
-  text-align: center;
-  font-size: 2em;
-  font-family: 'Roboto';
-  color: rgb(8, 42, 94);
+.question-form .question-title {
+	text-align: center;
+	margin: 1.5vh 0;
 }
 
-.main{
-  text-align: center;
-  flex-grow: 1;
+div .main {
+	text-align: center;
 }
-.main label{
-  padding: 10px 10px;
+.main .form-group {
+	padding: 10px 10px;
 }
-input[type="radio"]:hover, input[type="radio"] + label:hover {
-  cursor: pointer;
-color: rgb(9, 143, 14);
+.form-group input {
+	margin-right: 10px;
+	align-items: center;
 }
-
-input[type="radio"]:checked+label{
-  color:#4CAF50;
-  font-weight: bold;
-}
-
-input[type='radio']:after{
-        border-radius: 15px;
-        background-color: #18c118;
-        border: 2px solid rgb(220, 20, 20);
+.form-group input[type='radio']:hover,
+input[type='radio'] + label:hover {
+	cursor: pointer;
+	color: rgb(9, 143, 14);
 }
 
-.button{
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 12px 26px;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1.2em;
+.form-group input[type='radio']:checked + label {
+	color: #4caf50;
+	font-weight: bold;
 }
 
-.flag{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 40%;
-  max-height: 50%;
-  margin: auto;
-  margin-top: 50px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-.button:hover{
-background-color: rgb(9, 143, 14);
-}
-.button:active{
-background-color: #ff9800;
-}
-footer{
-  margin-top: 100px;
-  text-align: center;
-  flex: 0 0 auto;
+.form-group input[type='radio']:after {
+	border-radius: 15px;
+	background-color: #18c118;
+	border: 2px solid rgb(220, 20, 20);
 }
 
-@media (max-width: 1000px){
-.flag{
-    max-width: 50%;
-  max-height: 60%;
+.button {
+	background-color: #4caf50;
+	border: none;
+	color: white;
+	padding: 12px 26px;
+	margin: 10px 10px;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1.2em;
 }
+
+.flag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 40vw;
+	max-height: auto;
+	margin: auto;
+	margin-top: 50px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-@media (max-width: 700px){
-  .main{
-    order:1;
+.button:hover {
+	background-color: rgb(9, 143, 14);
+}
+.button:active {
+	background-color: #ff9800;
+}
+footer {
+	margin-top: 10vh;
+	text-align: center;
+	flex: 0 0 auto;
+	margin-bottom: 2vh;
+}
+
+@media (max-width: 1000px) {
+	.flag {
+		max-width: 40%;
+		max-height: auto;
+	}
+}
+@media (max-width: 900px) {
+	.flag {
+		max-width: 40%;
+		max-height: auto;
+	}
+}
+@media (max-width: 800px) {
+	.main {
+		order: 2;
+		margin-top: 1vh;
   }
-  .main form{
+  .question-form .question-title{
+    padding-top: 4vh;
+  }
+  .question-form{
     display: flex;
-    flex-direction: column;
-  }
-  .main form label{
-    align-self: stretch;
-    padding-top: 10px;
-  }
-
-.flag{
-  order:0;
-  max-width: 60%;
-  max-height: 70%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-  footer{
+    flex-direction: column;	
+    align-items: stretch;
     order:2;
-  }
+}
+	.main form {
+		display: flex;
+		flex-direction: column;
+	}
+	.main button {
+		margin: 4vh 0;
+	}
+
+	.main .form-group {
+		padding: 1vh;
+	}
+
+	.flag {
+		order: 0;
+		max-width: 40%;
+		max-height: auto;
+		margin: 5vh auto 0;
+	}
+	footer {
+		order: 2;
+    margin-bottom: 0;
+    margin-top: 2vh;
+	}
+}
+
+@media (max-width: 500px){
+	.flag {
+		max-width: 50%;
+		margin: 5vh auto 0;
+	}
+	footer {
+    margin-top: 8vh;
+	}
 }
