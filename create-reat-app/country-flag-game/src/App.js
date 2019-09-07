@@ -77,7 +77,7 @@ class App extends React.Component {
 				country.map((country, index) => {
 					flagUrls[index] = country.flagUrls;
 					countryNames[index] = country.countryNames;
-					return false
+					return false;
 				});
 				this.nextCountry(countryNames, false);
 				this.setState({ flagUrls, countryNames });
@@ -149,7 +149,7 @@ class App extends React.Component {
 		const countrys = selectedCountrysIndex.map(i => {
 			return countryNames[i];
 		});
-		
+
 		return (
 			<div className='app'>
 				<h2 className='header-title'> Guess The Flag</h2>
