@@ -1,45 +1,64 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import TodoForm from './TodoForm';
+import * as apiCalls from './api';
 
-const APIURL = 'api/todos';
 
 class TodoList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { todos: [] };
+		this.addTodo = this.addTodo.bind(this);
 	}
 
 	componentDidMount() {
 		this.loadTodos();
 	}
-	loadTodos() {
-		fetch(APIURL)
-			.then(resp => {
-				if (!resp.ok) {
-					if (resp.status >= 400 && resp.status < 500) {
-						return resp.json().then(data => {
-							let err = { errorMessage: data.message };
-							throw err;
-						});
-					} else {
-						let err = {
-							errorMessage: 'Please try again later, server not response.'
-						};
-						throw err;
-					}
-				}
-				return resp.json();
-			})
-			.then(todos => this.setState({ todos }));
+	async loadTodos() {
+		let todos = await apiCalls.getTodos();
+		this.setState({ todos });
 	}
 
+	async addTodo(val) {
+		let newTodo = await apiCalls.createTodo(val);
+		console.log("newTodo",newTodo);
+		this.setState({ todos: [...this.state.todos, newTodo ]});
+	}
+
+	async deleteTodo(id) {
+		await apiCalls.removeTodo(id);
+		const todos = this.state.todos.filter(todo => todo._id !== id);
+		this.setState({ todos: todos });
+	}
+
+	async toggleTodo(todo) {
+		let updatedTodo = await apiCalls.updateTodo(todo);
+				const todos = this.state.todos.map(todo =>
+					todo._id === updatedTodo._id
+						? { ...todo, completed: !todo.completed }
+						: todo
+				);
+				this.setState({ todos: todos });
+
+	}
 	render() {
-		const todos = this.state.todos.map(t => <TodoItem key={t._id} {...t} />);
-		console.log('this.state', this.state);
+		console.log("this.state",this.state);
+		const todos = this.state.todos.map(t => (
+			<TodoItem
+				key={t._id}
+				{...t}
+				onDelete={this.deleteTodo.bind(this, t._id)}
+				onToggle={this.toggleTodo.bind(this, t)}
+			/>
+		));
+
 		return (
 			<div>
 				<h2>Todo List!</h2>
-				<ul>{todos} {}</ul>
+				<TodoForm addTodo={this.addTodo} />
+				<ul>
+					{todos} {}
+				</ul>
 			</div>
 		);
 	}

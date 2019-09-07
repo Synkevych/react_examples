@@ -1,19 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// rafce raft
+import './TodoItem.css'
 
-const TodoItem = ({name, completed}) => {
+const TodoItem = ({name, completed, onDelete, onToggle}) => {
 	console.log("name",name);
-	return (
+	return (<div>
 		<li
 			style={{
 				textDecoration: completed ? 'line-through': 'none'
 			}}
+			onClick={onToggle}
 		>
 			{name}
 		</li>
-	)
+			<span onClick={onDelete}> X</span>
+	</div>)
 }
 
 TodoItem.propTypes = {

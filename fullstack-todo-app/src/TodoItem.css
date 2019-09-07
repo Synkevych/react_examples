@@ -1,0 +1,19 @@
+ul{
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+ul li {
+	display: inline;
+	cursor: pointer;
+}
+ul div {
+	margin: 5px;
+}
+
+div span {
+	font-weight: 700;
+	color: red;
+	cursor: pointer;
+}
