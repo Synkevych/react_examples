@@ -11,7 +11,6 @@ The parent can pass a prop by using this syntax:
 ```
 
 ### state
-
 - State on the other hand is still variables, but directly initialized and managed by the component.
 - The state can be initialized by props.
 - State is always passed from a parent down to a child component as a prop.
@@ -19,6 +18,15 @@ The parent can pass a prop by using this syntax:
 - State should be owned by 1 component. 
 - Don't duplicate props to state.
 
+```jsx 
+	class MyClass extends React.Component {
+		constructor(props){
+			super(props);
+			this.state = { ... }
+		}
+		...
+	}
+```
 ### props.children
 A collection of the children inside of a component ... 
 
@@ -205,7 +213,7 @@ points.sort(function(a, b){return 0.5 - Math.random()});
 - constructor()
 - static getDerivedStateFromProps()
 - dep: componentWillMount() - only run 1 time 
-- rennder() - is the only required method in a class component.
+- rennder() - is the only **required** method in a class component.
 - componentDidMount() - run only 1 time, makinng AJAX request
 
 ### Unmounting 
@@ -221,7 +229,6 @@ points.sort(function(a, b){return 0.5 - Math.random()});
 - componentDidUpdate(prevProps, prevState)
 
 # Problems with port
-
 There is a problem: server running on port 8081, react app on port 3000.
 To fix: need to specify server port inside package.json file, adding: 
 ```
