@@ -86,7 +86,8 @@ class App extends React.Component {
 	removeCountryFromState(countryNames, id) {
 		let countryName = countryNames[id];
 		let newCountrys = countryNames.filter(country => country !== countryName);
-		this.setState({ countryNames: newCountrys });
+		let newFlagUrls = this.state.flagUrls.filter((flag, index) => index !== id )
+		this.setState({ countryNames: newCountrys, flagUrls: newFlagUrls });
 	}
 	getRandom = val => Math.floor(Math.random() * val);
 	nextCountry(countryNames, isNewGame, skipRemoving) {
