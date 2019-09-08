@@ -314,3 +314,30 @@ const unsubscribe = store.listen(changeCallback);
 - - containers 
 - - reducers 
 - index.js
+
+### Data flow in React Redux 
+ininialization
+- createStore -> rootReducer  
+- mapStateToProps -> inside React Component, gives new Redux State
+- render -> inside React Component 
+change Redux store, using function dispatch
+- rootReduxer -> when dispatch action 
+- mapStateToProps -> insinde React Component, gives us new Redux State
+- render -> component 
+### Every time when you using **connect** function you can use dispatch method
+to use dispatch you can set another function iside the connect function
+```jsx
+
+fucntion mapDispathToProps(dispatch){
+	retunr{
+		addTodo: function(task){
+			dispatch({
+				type: "ADD_TODO", task
+			})
+		}
+	}
+}
+connect(mapStateToProps, mapDispatchToProps)
+//or
+connect(mapStateToProps, {addTodo, removeTodo}) //мы прокидаем функции actionCreators вместе с даными reduxStore
+```

@@ -1,35 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Todo from './Todo';
+import { addTodo, removeTodo, updateTodo } from './actionCreators';
 
 class TodoList extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { task: '' };
+		this.state = { task: '', completed: false };
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.removeTodo = this.removeTodo.bind(this);
+		this.toggleTodo = this.toggleTodo.bind(this);
 	}
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.dispatch({
-			type: 'ADD_TODO',
-			task: this.state.task
-		});
-	e.target.reset()
+		this.props.addTodo(this.state.task);
+		e.target.reset();
 	}
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value
+			[e.target.name]: e.target.value,
+			completed: false
 		});
+	}
+	removeTodo(id) {
+		this.props.removeTodo(id);
+	}
+	toggleTodo(id) {
+		console.log('id', this.props);
+		this.props.updateTodo(id);
+		this.setState({completed: this.props.completed})
 	}
 	render() {
 		let todos = this.props.todos.map((val, index) => (
-			<Todo task={val.task} key={index} />
+			<Todo
+				completed={val.completed}
+				task={val.task}
+				key={index}
+				toggleTodo={this.toggleTodo.bind(this, val.id)}
+				removeTodo={this.removeTodo.bind(this, val.id)}
+			/>
 		));
-		console.log("todos",todos);
-		console.log("this.props",this.props);
-		console.log("this.props",this.props);
-		console.log("this.state",this.state);
+		console.log('this.props', this.state);
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -54,4 +66,17 @@ function mapStateToProps(reduxState) {
 	};
 }
 
-export default connect(mapStateToProps)(TodoList);
+// function mapDispatchToProps(dispatch){
+// 	return {
+// 		addTodo: function(task){
+// 			dispatch({
+// 				type: "ADD_TODO", task
+// 			})
+// 		}
+// 	}
+// }
+
+export default connect(
+	mapStateToProps,
+	{ addTodo, removeTodo, updateTodo }
+)(TodoList);
