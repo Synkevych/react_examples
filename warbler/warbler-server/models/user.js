@@ -30,11 +30,11 @@ userSchema.pre('save', async function(next) {
 		this.password = hashedPassword;
 		return next();
 	} catch (err) {
-		return next(error);
+		return next(err);
 	}
 });
 
-userSchema.method.comparePassword = async function(candidatePassword, next) {
+userSchema.methods.comparePassword = async function(candidatePassword, next) {
 	try {
 		let isMatch = await bcrypt.compare(candidatePassword, this.password);
 		return isMatch;
@@ -42,7 +42,6 @@ userSchema.method.comparePassword = async function(candidatePassword, next) {
 		return next(err);
 	}
 };
+const User = mongoose.model('User', userSchema);
 
-const User = mongoose.model('User'.userSchema);
-
-module.export = User;
+module.exports = User;

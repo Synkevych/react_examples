@@ -1,7 +1,7 @@
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
-// exports.signin = funciton(){}
+exports.signin = async function(req, res, next) {};
 
 exports.signup = async function(req, res, next) {
 	try {
@@ -32,9 +32,9 @@ exports.signup = async function(req, res, next) {
 			status: 400,
 			message: err.message
 		});
-		//see what kinf of error
-		// if it is a certain error
-		// respond with username/email already taken
-		// otherwise just send back a generic 400
 	}
 };
+//see what kinf of error
+// if it is a certain error
+// respond with username/email already taken
+// otherwise just send back a generic 400

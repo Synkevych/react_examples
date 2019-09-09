@@ -5,16 +5,18 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
+const db = require("./models");
 
 const PORT = 8082;
 
 app.use(cors());
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 
 // next is callback function 
 app.use(function(req, res, next){
-	let err = new Error("Not Fount");
+	let err = new Error("Not Found");
 	err.status = 404;
 	next(err);
 });
