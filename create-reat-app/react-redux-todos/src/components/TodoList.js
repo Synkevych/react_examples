@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
 import { connect } from 'react-redux';
-import { addTodo, removeTodo, updateTodo } from '../actionCreators';
+import { addTodo, removeTodo, getTodos } from '../actionCreators';
 import { Route } from 'react-router-dom';
 
 class TodoList extends Component {
 	constructor(props) {
 		super(props);
 		this.handleAdd = this.handleAdd.bind(this);
-		this.removeTodo = this.removeTodo.bind(this);
-		this.toggleTodo = this.toggleTodo.bind(this);
+		// this.removeTodo = this.removeTodo.bind(this);
+		// this.toggleTodo = this.toggleTodo.bind(this);
+	}
+	componentDidMount() {
+		this.props.getTodos();
 	}
 	handleAdd(val) {
 		this.props.addTodo(val);
@@ -18,19 +21,19 @@ class TodoList extends Component {
 	removeTodo(id) {
 		this.props.removeTodo(id);
 	}
-	toggleTodo(id) {
-		console.log('id', this.props);
-		this.props.updateTodo(id);
-		this.setState({ completed: this.props.completed });
-	}
+	// toggleTodo(id) {
+	// 	console.log('id', this.props);
+	// 	this.props.handleUpdate(id);
+	// 	this.setState({ completed: this.props.completed });
+	// }
 	render() {
-		let todos = this.props.todos.map((val, index) => (
+		let todos = this.props.todos.map(val => (
 			<Todo
 				completed={val.completed}
 				task={val.task}
-				key={index}
-				toggleTodo={this.toggleTodo.bind(this, val.id)}
-				removeTodo={this.removeTodo.bind(this, val.id)}
+				key={val._id}
+				// toggleTodo={this.toggleTodo.bind(this, val.id)}
+				removeTodo={this.removeTodo.bind(this, val._id)}
 			/>
 		));
 		console.log('this.props', this.state);
@@ -74,5 +77,5 @@ function mapStateToProps(reduxState) {
 
 export default connect(
 	mapStateToProps,
-	{ addTodo, removeTodo, updateTodo }
+	{ addTodo, removeTodo, getTodos }
 )(TodoList);
