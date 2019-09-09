@@ -15,3 +15,7 @@ or
 `curl localhost:8082`
 
 ### models -> index.js – connection to database
+
+### insede folder .env put secret key 
+### dotenv module - load our enviropment variable 
+
