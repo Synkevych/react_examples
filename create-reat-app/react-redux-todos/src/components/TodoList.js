@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
 import { connect } from 'react-redux';
-import { addTodo, removeTodo, updateTodo } from './actionCreators';
+import { addTodo, removeTodo, updateTodo } from '../actionCreators';
 import { Route } from 'react-router-dom';
 
 class TodoList extends Component {
