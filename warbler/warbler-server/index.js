@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const db = require("./models");
+const messagesRouters = require("./routes/messages");
 
 const PORT = 8082;
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
+app.use('/api/users/:id/messages', messagesRouters);
 
 // next is callback function 
 app.use(function(req, res, next){
