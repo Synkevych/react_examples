@@ -1,0 +1,32 @@
+ /* NavBar */
+
+ .navbar {
+	 margin-bottom: 1rem;
+ }
+
+ .navbar a{
+	 font-weight: bold;
+ }
+
+ .navbar a:hover {
+	 color:white;
+	 text-decoration: underline;
+	 cursor: pointer;
+ }
+
+ .navbar-brand > img{
+	display: inline-block;
+	width: 40px;
+	margin-bottom: 2px;
+	margin-right: 5px;
+	border-radius: 2px;
+ }
+
+ ul.nav.navbar-nav li {
+	 margin: 0 0.5rem;
+ }
+
+ .onboarding > .navbar {
+	 background-image: url("../images/nav-bg.png");
+	 background-size: 100%;
+ }
