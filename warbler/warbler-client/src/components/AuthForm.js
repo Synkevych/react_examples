@@ -20,24 +20,39 @@ class AuthForm extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		const authType = this.props.signUp ? 'signup' : 'signin';
-		this.props.onAuth(authType, this.state).then(() => {
-			console.log('Logged in successfully!');
-		});
+		this.props
+			.onAuth(authType, this.state)
+			.then(() => {
+				console.log('Logged in successfully!');
+				this.props.history.push("/");
+			})
+			.catch(() => {
+				return;
+			});
 	};
 	render() {
 		const { email, username, password, profileImageUrl } = this.state;
-		const { heading, buttonText, signUp, errors, history, removeError } = this.props;
-		console.log('signUp', signUp);
+		const {
+			heading,
+			buttonText,
+			signUp,
+			errors,
+			history,
+			removeError
+		} = this.props;
 		history.listen(() => {
 			removeError();
-		})
+		});
+		console.log('signUp', signUp);
 		return (
 			<div>
 				<div className='row justify-content-md-center text-center'>
 					<div className='col-md-6'>
 						<form action='' onSubmit={this.handleSubmit}>
 							<h2>{heading}</h2>
-							{errors.message && <div className="alert alert-danger">{errors.message}</div>}
+							{errors.message && (
+								<div className='alert alert-danger'>{errors.message}</div>
+							)}
 							<label htmlFor='email'>Email:</label>
 							<input
 								className='form-control'
@@ -46,7 +61,7 @@ class AuthForm extends React.Component {
 								autoComplete='on'
 								onChange={this.handleChange}
 								value={email}
-								type='text'
+								type='email'
 							/>
 							<label htmlFor='password'>Password:</label>
 							<input

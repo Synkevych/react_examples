@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+// set tokent when send request to messages 
 export function setTokenHeader(token) {
 	if (token) {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

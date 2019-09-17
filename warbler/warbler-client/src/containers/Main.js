@@ -8,6 +8,7 @@ import { removeError } from '../store/actions/errors';
 
 const Main = props => {
 	const { authUser, currentUser, errors, removeError } = props;
+	console.log("Main curr user: ",currentUser);
 	return (
 		<div className='container'>
 			<Switch>
@@ -15,7 +16,10 @@ const Main = props => {
 					exact
 					path='/'
 					render={props => (
-						<Homepage errors={errors} currentUser={currentUser} {...props} />
+						<Homepage 
+						errors={errors} 
+						currentUser={currentUser} 
+						{...props} />
 					)}
 				/>
 				<Route
@@ -40,7 +44,7 @@ const Main = props => {
 					render={props => {
 						return (
 							<AuthForm
-							removeError={removeError}
+								removeError={removeError}
 								errors={errors}
 								onAuth={authUser}
 								signUp
