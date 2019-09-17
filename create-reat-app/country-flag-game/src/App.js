@@ -74,10 +74,9 @@ class App extends React.Component {
 				});
 				let flagUrls = [];
 				let countryNames = [];
-				country.map((country, index) => {
+				country.forEach((country, index) => {
 					flagUrls[index] = country.flagUrls;
 					countryNames[index] = country.countryNames;
-					return false;
 				});
 				this.nextCountry(countryNames, false);
 				this.setState({ flagUrls, countryNames });
