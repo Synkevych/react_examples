@@ -12,7 +12,7 @@ class NavBar extends Component {
 	}
 
 	render() {
-		console.log('this', this.props.currentUser);
+		
 		return (
 			<nav className='navbar navbar-expand'>
 				<div className='container-fluid'>
@@ -22,12 +22,12 @@ class NavBar extends Component {
 					</Link>
 				 </div>
 				 { this.props.currentUser.isAuthenticated ? (
-					 <ul className="nav-nnavbar-nav navbar-right">
+					 <ul className="nav navbar-nav navbar-right">
 						 <li>
-							 <Link to={`/user/${this.props.currentUser.user.id}/messages/new`}>New Messages</Link>
+							 <Link to={`/users/${this.props.currentUser.user.id}/messages/new`}>New Messages</Link>
 						 </li>
 						 <li>
-							 <a href="null"onClick={this.logout}>Log out</a>
+							 <a onClick={this.logout}>Log out</a>
 						 </li>
 					 </ul> 
 				 ): (

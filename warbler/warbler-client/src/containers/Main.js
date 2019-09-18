@@ -5,10 +5,11 @@ import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
 import { authUser } from '../store/actions/auth';
 import { removeError } from '../store/actions/errors';
+import withAuth from "../hocs/withAuth";
+import MessageForm from "../containers/MessageForm";
 
 const Main = props => {
 	const { authUser, currentUser, errors, removeError } = props;
-	console.log("Main curr user: ",currentUser);
 	return (
 		<div className='container'>
 			<Switch>
@@ -16,10 +17,7 @@ const Main = props => {
 					exact
 					path='/'
 					render={props => (
-						<Homepage 
-						errors={errors} 
-						currentUser={currentUser} 
-						{...props} />
+						<Homepage errors={errors} currentUser={currentUser} {...props} />
 					)}
 				/>
 				<Route
@@ -55,6 +53,7 @@ const Main = props => {
 						);
 					}}
 				/>
+				<Route path='/users/:id/messages/new' component={withAuth(MessageForm)} />
 			</Switch>
 		</div>
 	);

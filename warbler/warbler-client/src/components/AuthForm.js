@@ -43,7 +43,6 @@ class AuthForm extends React.Component {
 		history.listen(() => {
 			removeError();
 		});
-		console.log('signUp', signUp);
 		return (
 			<div>
 				<div className='row justify-content-md-center text-center'>

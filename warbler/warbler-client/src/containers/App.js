@@ -15,8 +15,6 @@ const store = configureStore();
 if(localStorage.jwtToken){
 	setAthorizationToken(localStorage.jwtToken);
 	// prevent someone from manually tampering with the key of jwtToken in localStorage
-console.log("localStorage.jwtToken",localStorage.jwtToken);
-console.log('jwtToken Decode', jwtDecode(localStorage.jwtToken));
 	try {
 		store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
 	} catch (error) {
