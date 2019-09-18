@@ -1,16 +1,16 @@
-require('dotenv')
+const dotenv = require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
 
 // make sure the user is logged - Authentication
-
 exports.loginRequired = function(req, res, next) {
-	console.log("token", req);
+
 	try {
 		const token = req.headers.authorization.split(' ')[1];
-		jwt.verify(token, process.evt.SECRET_KEY, function(err, decoded) {
+		jwt.verify(token, dotenv.parsed.SECRET_KEY, function(err, decoded) {
 			console.log("token", decoded);
 			if (decoded) {
-				return next();
+				 next();
 			} else {
 				return next({
 					status: 401,

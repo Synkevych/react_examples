@@ -1,4 +1,5 @@
-require('dotenv').config(); // load our invar variables
+const dotenv = require('dotenv').config(); // load our invar variables
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -13,7 +14,8 @@ const PORT = 8082;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/api/auth', authRoutes);
 app.use(
 	'/api/users/:id/messages',
@@ -24,7 +26,7 @@ app.use(
 
 app.get('/api/messages', loginRequired, async function(req, res, next) {
 	try {
-		let messages = await db.Messages
+		let messages = await db.Message
 			.find()
 			.sort({ createdAt: 'desc' })
 			.populate('user', {
