@@ -74,19 +74,18 @@ class App extends React.Component {
 				});
 				let flagUrls = [];
 				let countryNames = [];
-				country.map((country, index) => {
+				country.forEach((country, index) => {
 					flagUrls[index] = country.flagUrls;
 					countryNames[index] = country.countryNames;
-					return false;
 				});
 				this.nextCountry(countryNames, false);
 				this.setState({ flagUrls, countryNames });
 			});
 	}
 	removeCountryFromState(countryNames, id) {
-		let countryName = countryNames[id];
-		let newCountrys = countryNames.filter(country => country !== countryName);
-		let newFlagUrls = this.state.flagUrls.filter((flag, index) => index !== id )
+		const countryName = countryNames[id];
+		const newCountrys = countryNames.filter(country => country !== countryName);
+		const newFlagUrls = this.state.flagUrls.filter((flag, index) => index !== id )
 		this.setState({ countryNames: newCountrys, flagUrls: newFlagUrls });
 	}
 	getRandom = val => Math.floor(Math.random() * val);
