@@ -1,6 +1,7 @@
 import React from 'react';
 import InputCoutry from './InputCoutry';
 import PropTypes from 'prop-types';
+import Footer from './Footer';
 
 import './App.css';
 
@@ -83,9 +84,11 @@ class App extends React.Component {
 			});
 	}
 	removeCountryFromState(countryNames, id) {
-		let countryName = countryNames[id];
-		let newCountrys = countryNames.filter(country => country !== countryName);
-		let newFlagUrls = this.state.flagUrls.filter((flag, index) => index !== id )
+		const countryName = countryNames[id];
+		const newCountrys = countryNames.filter(country => country !== countryName);
+		const newFlagUrls = this.state.flagUrls.filter(
+			(flag, index) => index !== id
+		);
 		this.setState({ countryNames: newCountrys, flagUrls: newFlagUrls });
 	}
 	getRandom = val => Math.floor(Math.random() * val);
@@ -176,30 +179,7 @@ class App extends React.Component {
 				) : (
 					<div className='flag'> Loading ... </div>
 				)}
-				<footer>
-					<div>
-						Coded and built with{' '}
-						<span role='img' aria-label='heart'>
-							❤️
-						</span>{' '}
-						by{' '}
-						<a
-							href='https://www.linkedin.com/in/synkevych'
-							target='_blank'
-							rel='noopener noreferrer'
-						>
-							Synkevych{' '}
-						</a>
-					</div>
-					Source code available on{' '}
-					<a
-						href='https://github.com/Synkevych/react_examples/tree/master/create-reat-app/country-flag-game'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						GitHub
-					</a>
-				</footer>
+				<Footer />
 			</div>
 		);
 	}
