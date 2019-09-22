@@ -7,9 +7,9 @@ const UserAside = ({ profileImageUrl, username }) => (
 			<div className='panel-body'>
 				<img
 					src={profileImageUrl || DefaultProfileImg}
-					alt='user logo'
-					width="200"
-					height="200"
+					alt={username}
+					width='200'
+					height='200'
 					className='img-thumbnail'
 				/>
 				<h2>{username} </h2>

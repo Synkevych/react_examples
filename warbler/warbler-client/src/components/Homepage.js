@@ -15,6 +15,7 @@ const Homepage = ({ currentUser }) => {
 			</div>
 		);
 	}
+	console.log('img Home page: ', currentUser.user.profileImageUrl);
 	return (
 		<div>
 			<MessageTimeLine

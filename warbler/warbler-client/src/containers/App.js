@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import NavBar from './NavBar';
 import Main from './Main';
+import Footer from '../components/Footer';
 import { setAthorizationToken, setCurrentUser } from '../store/actions/auth';
 import jwtDecode from "jwt-decode";
 
@@ -29,6 +30,7 @@ const App = () => {
 				<div className="onboarding">
 					<NavBar />
 					<Main />
+					<Footer/>
 				</div>
 			</Router>
 		</Provider>

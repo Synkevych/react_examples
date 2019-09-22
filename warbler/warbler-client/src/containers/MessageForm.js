@@ -18,7 +18,6 @@ class MessageForm extends Component {
 		this.props.history.push('/');
 	};
 	render() {
-
 		return (
 			<form onSubmit={this.handleNewMessage}>
 				{this.props.errors.message && (
@@ -30,9 +29,13 @@ class MessageForm extends Component {
 					value={this.state.message}
 					onChange={e => this.setState({ message: e.target.value })}
 				/>
-				<button type='submit' className='btn btn-success pull-right' onClick={removeMessage}>
+				<button
+					type='submit'
+					className='btn btn-success'
+					onClick={removeMessage}
+				>
 					{' '}
-					Add my message
+					Add message
 				</button>
 			</form>
 		);
