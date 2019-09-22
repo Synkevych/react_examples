@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.4/redux.js"></script>
+	<script>
+
+	var initialState = { count: 0 };
+	function rootReducer(state = initialState, action) {
+		if(action.type === 'INCREMENT'){
+			let newState = Object.assign({}, state)
+			newState.count++
+			return newState
+		}
+		if(action.type === 'DECREMENT'){
+			let newState = Object.assign({}, state)
+			newState.count--
+			return newState
+		}
+		return state
+	}
+	var store = Redux.createStore(rootReducer);
+
+	console.log('store', store.getState())
+
+	store.dispatch({type: 'Hello'});
+	console.log("store.getState()",store.getState());
+	
+	// to change store create reducer
+	store.dispatch({ type: 'INCREMENT' })
+	console.log("store",store.getState());
+	
+	//actionCreator
+	function increment(){
+		return{
+			type: 'INCREMENT'
+		}
+	}
+	
+	store.dispatch(increment());
+		
+	</script>
+</body>
+</html>

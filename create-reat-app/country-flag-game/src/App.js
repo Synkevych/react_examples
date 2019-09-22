@@ -86,9 +86,13 @@ class App extends React.Component {
 	removeCountryFromState(countryNames, id) {
 		const countryName = countryNames[id];
 		const newCountrys = countryNames.filter(country => country !== countryName);
+<<<<<<< HEAD
 		const newFlagUrls = this.state.flagUrls.filter(
 			(flag, index) => index !== id
 		);
+=======
+		const newFlagUrls = this.state.flagUrls.filter((flag, index) => index !== id )
+>>>>>>> warbler
 		this.setState({ countryNames: newCountrys, flagUrls: newFlagUrls });
 	}
 	getRandom = val => Math.floor(Math.random() * val);

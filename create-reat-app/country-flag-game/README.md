@@ -7,4 +7,3 @@ Add data to state:
 - flag, arrays of 250 element
 
 If game over, get new request, else work with Arrays in state.
-
