@@ -6,6 +6,7 @@
 
  .navbar a{
 	 font-weight: bold;
+	 color: #495057;
  }
 
  .navbar a:hover {
@@ -35,6 +36,16 @@
  
  .logo-text{
 	 text-transform: uppercase;
-	 font-family: 'Cantarell', sans-serif;
+	 font-family: 'Saira Stencil One', cursive;
 	 font-weight: 800;
+ }
+
+ .logo-icon{
+	font-size: 30px;
+	vertical-align: middle;
+	line-height: 2;
+	padding-right: 5px;
+ }
+  .navbar-header:first-child a:hover{
+	text-decoration: none;
  }

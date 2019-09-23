@@ -23,7 +23,6 @@ class AuthForm extends React.Component {
 		this.props
 			.onAuth(authType, this.state)
 			.then(() => {
-				console.log('Logged in successfully!');
 				this.props.history.push("/");
 			})
 			.catch(() => {

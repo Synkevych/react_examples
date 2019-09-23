@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../store/actions/auth';
-import Logo from '../images/warbler-logo.png';
 import './NavBar.css';
 
 class NavBar extends Component {
@@ -17,9 +16,15 @@ class NavBar extends Component {
 				<div className='container-fluid'>
 					<div className='navbar-header'>
 						<Link to='/' className='navbar-brand'>
-							<img src={Logo} alt='Warbler logo' />
+							<span
+								className='logo-icon'
+								role='img'
+								aria-label='Front-Facing Baby Chick'
+							>
+								🐥
+							</span>
+							<h2 className='navbar-brand logo-text'>Warbler</h2>
 						</Link>
-						<h2 className='navbar-brand logo-text'>Warbler</h2>
 					</div>
 					{this.props.currentUser.isAuthenticated ? (
 						<ul className='nav navbar-nav navbar-right'>
@@ -31,7 +36,9 @@ class NavBar extends Component {
 								</Link>
 							</li>
 							<li>
-								<a onClick={this.logout}>Log out</a>
+								<a href='/' onClick={this.logout}>
+									Log out
+								</a>
 							</li>
 						</ul>
 					) : (

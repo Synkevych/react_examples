@@ -10,7 +10,7 @@ const db = require('./models');
 const messagesRouters = require('./routes/messages');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 
-const PORT = 8082;
+const PORT = process.env.PORT || 8082;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,8 +26,7 @@ app.use(
 
 app.get('/api/messages', loginRequired, async function(req, res, next) {
 	try {
-		let messages = await db.Message
-			.find()
+		let messages = await db.Message.find()
 			.sort({ createdAt: 'desc' })
 			.populate('user', {
 				username: true,

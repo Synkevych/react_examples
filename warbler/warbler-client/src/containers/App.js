@@ -7,19 +7,19 @@ import NavBar from './NavBar';
 import Main from './Main';
 import Footer from '../components/Footer';
 import { setAthorizationToken, setCurrentUser } from '../store/actions/auth';
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 
 const store = configureStore();
 
 //rehydrate using localStorage and jwtDecode
 
-if(localStorage.jwtToken){
+if (localStorage.jwtToken) {
 	setAthorizationToken(localStorage.jwtToken);
 	// prevent someone from manually tampering with the key of jwtToken in localStorage
 	try {
-		store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
+		store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 	} catch (error) {
-		store.dispatch(setCurrentUser({}))
+		store.dispatch(setCurrentUser({}));
 	}
 }
 
@@ -27,10 +27,10 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<Router>
-				<div className="onboarding">
+				<div className='onboarding'>
 					<NavBar />
 					<Main />
-					<Footer/>
+					<Footer />
 				</div>
 			</Router>
 		</Provider>
