@@ -5,13 +5,14 @@ exports.signin = async function(req, res, next) {
 	// finding a user
 	// checking if their password matches what was sent to the server
 	// if it all matches
-	// lo them
+	// allow them viewing message
 	try {
 		let user = await db.User.findOne({
 			email: req.body.email
 		});
 		let { id, username, profileImageUrl } = user;
 		let isMatch = await user.comparePassword(req.body.password);
+		console.log('pas', req.body.password, 'email', req.body.email);
 		if (isMatch) {
 			let token = jwt.sign(
 				{
