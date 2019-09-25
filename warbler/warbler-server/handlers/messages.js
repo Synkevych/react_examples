@@ -21,7 +21,7 @@ exports.createMessage = async function(req, res, next) {
 };
 
 // GET - /api/users/:id/messages/:message_id
-exports.getMessage = async function(req, res, next) {
+exports.getMessages = async function(req, res, next) {
 	try {
 		let message = await db.Message.find(req.params.message._id);
 		return res.status(200).json(message);

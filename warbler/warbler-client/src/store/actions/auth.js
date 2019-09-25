@@ -29,11 +29,11 @@ export function authUser(type, userData) {
 			.then(({ token, ...user }) => {
 					localStorage.setItem('jwtToken', token);
 					setAthorizationToken(token);
+					console.log("authUser", token);
 					dispatch(setCurrentUser(user));
 					dispatch(removeError());
 					resolve(); // indicate that the API call succeeded
 				}).catch(error => {
-					console.log("catch is handle");
 					dispatch(addError(error.message));
 					reject(); // indicate the API call failed 
 				});

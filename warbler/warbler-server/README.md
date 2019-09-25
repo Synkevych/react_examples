@@ -42,7 +42,8 @@ MONGODB_URI: mongodb://heroku_3sz17f71:janjtidjv7h9okshv57d7gjdop@ds145356.mlab.
 - git commit -m "ready to deploy"
 - git push heroku master 
 - heroku config:set SECRET_KEY=fjaieo23ASdfEaFasdfe5689fsSDF
-- heroku open - test connection to database and node 
+- heroku open - test nnection to database and node
+-heroku logs -t -a warbler-server-md - server loging 
 
 ### Deploying the Frontend 
 - remove git files: rm -rf .git
@@ -54,3 +55,4 @@ MONGODB_URI: mongodb://heroku_3sz17f71:janjtidjv7h9okshv57d7gjdop@ds145356.mlab.
 ### Redeploy 
 - git add .
 - git commit -m "Fix something"
+- heroku push heroku master 
