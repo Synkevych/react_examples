@@ -4,10 +4,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const todoRoutes = require('./routes/todos');
+const port = process.env.PORT || 3100;
 
 app.use(morgan("tiny"));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ useNewUrlParser: true }));
 app.use(cors());
 app.use("/api/todos", todoRoutes);
 

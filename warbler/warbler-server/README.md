@@ -3,7 +3,8 @@
 ### Start server comand 
 `nodemon`
 or 
-`node inde.js` 
+`node inde.js`
+
 ### libraries 
 - bcrypt – help to hash passwords 
 
@@ -28,7 +29,7 @@ Body:
 x-www-form-urlencoded
 key: value
 
-### Deploying the Backend 
+### Deploying the Backend on heroku
 - remove git files: rm -rf .git  
 - git init 
 - echo node_modules > .gitignore
@@ -45,7 +46,7 @@ MONGODB_URI: mongodb://heroku_3sz17f71:janjtidjv7h9okshv57d7gjdop@ds145356.mlab.
 - heroku open - test nnection to database and node
 -heroku logs -t -a warbler-server-md - server loging 
 
-### Deploying the Frontend 
+### Deploying the Frontend on heroku
 - remove git files: rm -rf .git
 - git init 
 - echo node_modules > .gitignore

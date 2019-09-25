@@ -14,3 +14,6 @@ to see request to our server
 brew install httpie 
 
 ### To run back-end use nodemon
+
+### Run the server 
+node index.js 

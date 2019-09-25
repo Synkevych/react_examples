@@ -27,6 +27,7 @@ The parent can pass a prop by using this syntax:
 		...
 	}
 ```
+
 ### props.children
 A collection of the children inside of a component ... 
 
@@ -42,7 +43,6 @@ class Row extends React.Component {
 		</div> 
 	}
 }
-
 class App extends React.Component {
 	render(){
 		return(
@@ -55,6 +55,7 @@ class App extends React.Component {
 	}
 }
 ```
+
 ### setState is Asynchronous 
 The correct way to change state in your application.
 All changes to this.state should be pure.
@@ -183,6 +184,7 @@ onClick = { this.handleClick }
 
 </form> 
 ```
+
 ### ref 
 Use an uncontroled input component.
 A direct reference to a DOM element
@@ -196,6 +198,7 @@ Integrating with third-party DOM libraries
 		ref= { (input) => this.inputText = input } />
 </form>
 ```
+
 ### Here is a very simple way to shuffle array with JS:
 
 ```javascript
@@ -244,7 +247,6 @@ history.forward();
 history.pushState({}, 'title', '/newpage');
 ```
 ### React Router 
-
 React Router v4(March 2017) a library to manage routing in your single page application
 
 BrouserRouter - requires server site support 
@@ -287,16 +289,13 @@ To create Store use createStore function wich accepts the root reducer as a para
 const store = Redux.createStore(rootReducer);
 
 //or
-
 const store = Redux.createStore(rootReducer);
 store.dispatch({
 	type: "LOGIN_USER"
 });
 
 // to get state
-
 const newState = store.getState();
-
 ``` 
 
 You  can add a listenr to see whwn the state has changed 
@@ -323,7 +322,8 @@ ininialization
 change Redux store, using function dispatch
 - rootReduxer -> when dispatch action 
 - mapStateToProps -> insinde React Component, gives us new Redux State
-- render -> component 
+- render -> component
+
 ### Every time when you using **connect** function you can use dispatch method
 to use dispatch you can set another function iside the connect function
 ```jsx
