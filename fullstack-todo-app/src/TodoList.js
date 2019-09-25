@@ -39,7 +39,6 @@ class TodoList extends React.Component {
 						: todo
 				);
 				this.setState({ todos: todos });
-
 	}
 	render() {
 		console.log("this.state",this.state);
