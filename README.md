@@ -1,3 +1,11 @@
+## tools
+HTTPie
+- httpie - is a command line HTTP client that will make you smile.
+- brew install httpie
+cURL
+- cURL -  программа позволяющая взаимодействовать с множеством различных серверов по множеству различных протоколов с синтаксисом URL.
+- culr request from terminal: `curl localhost:8082`
+
 ### props 
 - Imutable!
 - In a React component, props are variables passed to it by its parent component.

@@ -16,4 +16,4 @@ brew install httpie
 ### To run back-end use nodemon
 
 ### Run the server 
-node index.js 
+node index.js
