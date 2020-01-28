@@ -56,4 +56,4 @@ MONGODB_URI: mongodb://heroku_3sz17f71:janjtidjv7h9okshv57d7gjdop@ds145356.mlab.
 ### Redeploy 
 - git add .
 - git commit -m "Fix something"
-- heroku push heroku master 
+- git push heroku master 

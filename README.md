@@ -306,7 +306,7 @@ store.dispatch({
 const newState = store.getState();
 ``` 
 
-You  can add a listenr to see whwn the state has changed 
+You  can add a listenr to see when the state has changed 
 ```jsx 
 const changeCallback = () => {
 	console.log("State has changed", store.getState());
