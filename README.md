@@ -1,3 +1,24 @@
+## React component lifecycle
+
+### Mounting 
+- **constructor()**
+- **static getDerivedStateFromProps()**
+- dep: componentWillMount() - only run 1 time 
+- **rennder()** - is the only **required** method in a class component.
+- **componentDidMount()** - run only 1 time, makinng AJAX request
+
+### Updating
+- **static getDerivedStateFromProps()**
+- dep: ComponentWillReceiveProps(nextProps)
+- **shouldComponentUpdate(nextProps, nextState)**
+- dep: componentWillUpdate(nextProps, nextState)
+- **render()**
+- **getSnapshotBeforeUpdate()**
+- **componentDidUpdate(prevProps, prevState)**
+
+### Unmounting 
+- **ComponentWillUnmount()** - clearInterval()
+
 ## tools
 HTTPie
 - httpie - is a command line HTTP client that will make you smile.
@@ -219,25 +240,6 @@ points.sort(function(a, b){return 0.5 - Math.random()});
 	❤️
 </span>
 ```
-
-### Mounting 
-- constructor()
-- static getDerivedStateFromProps()
-- dep: componentWillMount() - only run 1 time 
-- rennder() - is the only **required** method in a class component.
-- componentDidMount() - run only 1 time, makinng AJAX request
-
-### Unmounting 
-- ComponentWillUnmount() - clearInterval()
-
-### Updating
-- static getDerivedStateFromProps()
-- dep: ComponentWillReceiveProps(nextProps)
-- shouldComponentUpdate(nextProps, nextState)
-- dep: componentWillUpdate(nextProps, nextState)
-- render()
-- getSnapshotBeforeUpdate()
-- componentDidUpdate(prevProps, prevState)
 
 # Problems with port
 There is a problem: server running on port 8081, react app on port 3000.
